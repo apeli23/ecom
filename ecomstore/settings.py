@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'catalog',
+    'utils',
     
 ]
 
@@ -65,6 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                 
             ],
         },
     },
@@ -131,3 +134,7 @@ if DEBUG:
     STATICFILES_DIRS = ( 
         os.path.join(os.path.dirname(BASE_DIR), "ecomstore","static", "static"),
         )
+
+SITE_NAME = 'Ecomstore'
+META_KEYWORDS = 'men, women, children, shoes'
+META_DESCRIPTION = 'Ecomstore is an online supplier of clothes  and shoes  for clients all over the world'
