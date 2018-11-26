@@ -4,6 +4,12 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 # Create your models here.
 
 class category(models.Model):
+	class Meta(object):
+		"""docstring for Meta"""
+		db_table = 'categories'
+		ordering = ['-created_at']
+		verbose_name_plural= 'Categories'
+
 	name = models.CharField(max_length=50)
 	slug = models.SlugField(max_length=50, unique=True, help_text='Unique value of product page URL, created from name.')
 	description = models.TextField();
@@ -13,23 +19,23 @@ class category(models.Model):
 	meta_description = models.CharField("Meta Description", max_length=255,help_text='Content for description  meta tag')
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at= models.DateTimeField(auto_now=True)
+	
+	def __str__(self):
+		return self.name
 
-	class Meta(object):
-		"""docstring for Meta"""
-		db_table = 'categories'
-		ordering = ['-created_at']
-		verbose_name_plural= 'Categories'
-		
-		def __init__(self):
-			return self.name
+	
+	# @permalink
+	def get_absolute_url(self):
+		return self.slug
 
 		
-		# def __str__(self):
-		# 	get_absolute_url = models.permalink(get_absolute_url)
-		# 	return ('catalog_category', (), { 'category_slug': self.slug })
 					 
 			
 class Product(models.Model):
+	class Meta:
+		db_table = 'products'
+		ordering = ['-created_at']
+		verbose_name_plural= 'Products'
 	name = models.CharField(max_length=50, unique=True)
 	slug = models.SlugField(max_length=50, unique=True, help_text='Unique value of product page URL, created from name.')
 	brand = models.CharField(max_length=50)
@@ -49,17 +55,15 @@ class Product(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 	categories = models.ManyToManyField(category)
+	
+	def __str__(self):
+		return self.name
 
+	# @permalink
+	def get_absolute_url(self):
+		return self.slug
 
-	class Meta(object):
-		db_table = 'products'
-		ordering = ['-created_at']
-		verbose_name_plural= 'Products'
-
-		def __init__(self):
-			return self.name
-
-		
+			
 			
 	 
 	 

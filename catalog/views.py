@@ -32,7 +32,7 @@ def show_category(request, category_slug, template="catalog/category.html"):
 	
 	c = get_object_or_404(Category, slug=category_slug)#hope u get this idea
 	
-	products = c.product_set.all()
+	products = c.Product_set.all()
 	page_title = c.name
 	meta_keywords = c.meta_keywords
 	meta_description = c.meta_description
